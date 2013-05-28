@@ -1,0 +1,60 @@
+# Translation of Featured Page Widget in Portuguese (Brazil)
+# This file is distributed under the same license as the Featured Page Widget package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2013-05-28 18:01-0300\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: GlotPress/0.1\n"
+"Project-Id-Version: Featured Page Widget\n"
+"POT-Creation-Date: \n"
+"Last-Translator: Eduardo Zulian <eduardozulian@gmail.com>\n"
+"Language-Team: \n"
+
+#: featured-page-widget.php:60
+msgid "Featured Page Widget"
+msgstr "Página destacada"
+
+#: featured-page-widget.php:163
+msgid "Continue reading"
+msgstr "Continue lendo"
+
+#: featured-page-widget.php:168
+msgid "Title:"
+msgstr "Título:"
+
+#: featured-page-widget.php:172
+msgid "Page:"
+msgstr "Página:"
+
+#: featured-page-widget.php:182
+msgid "Post thumbnail size:"
+msgstr "Tamanho da imagem destacada:"
+
+#: featured-page-widget.php:184
+msgid "No post thumbnail, thanks"
+msgstr "Sem imagem destacada, obrigado"
+
+#: featured-page-widget.php:194
+msgid "Link text:"
+msgstr "Texto do link:"
+
+#: featured-page-widget.php:196
+msgid "If empty, there will be no link to featured page."
+msgstr "Se vazio, não haverá link para a página destacada."
+
+msgid "http://github.com/eduardozulian/featured-page-widget"
+msgstr "http://github.com/eduardozulian/featured-page-widget"
+
+#: featured-page-widget.php:61
+msgid "Feature a page and display its excerpt and post thumbnail."
+msgstr "Destaca uma página, exibindo seu resumo e sua imagem destacada."
+
+msgid "Eduardo Zulian"
+msgstr "Eduardo Zulian"
+
+msgid "http://flutuante.com.br"
+msgstr "http://flutuante.com.br"
+
