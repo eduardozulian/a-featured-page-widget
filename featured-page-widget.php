@@ -24,7 +24,6 @@ License: GPL2
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-
 /**
  * Load translated strings
  */
@@ -85,10 +84,9 @@ class Featured_Page_Widget extends WP_Widget {
 		}
 		
 		ob_start();
-		extract($args);
-		
+		extract($args);		
 
-		if ( isset( $instance['page'] ) ) {
+		if ( isset( $instance['page'] ) && $instance['page'] != -1 ) {
 		
 			$page_id = (int) $instance['page'];
 			$page_link = strip_tags( $instance['page-link'] );
@@ -161,9 +159,7 @@ class Featured_Page_Widget extends WP_Widget {
 		$page = isset( $instance['page'] ) ? (int) $instance['page'] : 0;
 		$image_size = isset( $instance['image-size'] ) ? strip_tags( $instance['image-size'] ) : 'thumbnail';
 		$page_link = isset( $instance['page-link'] ) ? strip_tags( $instance['page-link'] ) : __( 'Continue reading', 'featured-page-widget' );
-		
 		?>
-		
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php _e( 'Title:', 'featured-page-widget' ); ?></label>
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
@@ -171,13 +167,30 @@ class Featured_Page_Widget extends WP_Widget {
 		<p>
 			<label for="<?php echo $this->get_field_id( 'page' ); ?>"><?php _e( 'Page:', 'featured-page-widget' ); ?></label>
 			<?php
-			wp_dropdown_pages( array(
-				'id' 		=> $this->get_field_id( 'page' ),
-				'name' 		=> $this->get_field_name( 'page' ),
-				'selected' 	=> $page,
-			) );
-			?>
-		</p>
+			// Mimic wp_dropdown_pages() funcionality to add a 'widefat' class to the <select> tag
+			$args = array(
+	            'depth' => 0,
+	            'child_of' => 0,
+	            'selected' => $page,
+	            'name' => $this->get_field_name( 'page' ),
+	            'id' => $this->get_field_id( 'page' ),
+	            'show_option_none' => '',
+	            'show_option_no_change' => '',
+	            'option_none_value' => ''
+	        );
+	
+	        extract( $args, EXTR_SKIP );
+	        $pages = get_pages($args);
+	        
+	        if ( ! empty( $pages ) ) : ?>
+	            <select class="widefat" name="<?php echo esc_attr( $name ); ?>" id="<?php echo esc_attr( $id ); ?>">
+	            	<option value="-1"><?php _e( 'Select a page', 'featured-page-widget' ); ?></option>
+	            	<?php echo walk_page_dropdown_tree( $pages, $depth, $args ) ?>;
+	            </select>
+	        <?php
+	        endif;
+	        ?>
+        </p>
 		<p>
 			<label for="<?php echo $this->get_field_id( 'image-size' ); ?>"><?php _e( 'Post thumbnail size:', 'featured-page-widget' ); ?></label>
 			<select class="widefat" id="<?php echo $this->get_field_id( 'image-size' ); ?>" name="<?php echo $this->get_field_name( 'image-size' ); ?>">
