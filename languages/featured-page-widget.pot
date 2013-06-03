@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Featured Page Widget 1.0\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/featured-page-widget\n"
-"POT-Creation-Date: 2013-05-28 20:59:50+00:00\n"
+"POT-Creation-Date: 2013-06-03 21:55:52+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -14,41 +14,45 @@ msgstr ""
 
 #. #-#-#-#-#  featured-page-widget.pot (Featured Page Widget 1.0)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
-#: featured-page-widget.php:60
+#: featured-page-widget.php:59
 msgid "Featured Page Widget"
 msgstr ""
 
 #. #-#-#-#-#  featured-page-widget.pot (Featured Page Widget 1.0)  #-#-#-#-#
 #. Description of the plugin/theme
-#: featured-page-widget.php:61
+#: featured-page-widget.php:60
 msgid "Feature a page and display its excerpt and post thumbnail."
 msgstr ""
 
-#: featured-page-widget.php:163
+#: featured-page-widget.php:161
 msgid "Continue reading"
 msgstr ""
 
-#: featured-page-widget.php:168
+#: featured-page-widget.php:164
 msgid "Title:"
 msgstr ""
 
-#: featured-page-widget.php:172
+#: featured-page-widget.php:168
 msgid "Page:"
 msgstr ""
 
-#: featured-page-widget.php:182
+#: featured-page-widget.php:187
+msgid "Select a page"
+msgstr ""
+
+#: featured-page-widget.php:195
 msgid "Post thumbnail size:"
 msgstr ""
 
-#: featured-page-widget.php:184
+#: featured-page-widget.php:197
 msgid "No post thumbnail, thanks"
 msgstr ""
 
-#: featured-page-widget.php:194
+#: featured-page-widget.php:207
 msgid "Link text:"
 msgstr ""
 
-#: featured-page-widget.php:196
+#: featured-page-widget.php:209
 msgid "If empty, there will be no link to featured page."
 msgstr ""
 
