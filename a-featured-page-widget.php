@@ -1,63 +1,63 @@
 <?php
 /*
-Plugin Name: Featured Page Widget
-Plugin URI: http://github.com/eduardozulian/featured-page-widget
+Plugin Name: A Featured Page Widget
+Plugin URI: http://github.com/eduardozulian/a-featured-page-widget
 Description: Feature a page and display its excerpt and post thumbnail.
 Version: 1.0
 Author: Eduardo Zulian
 Author URI: http://flutuante.com.br
 License: GPL2
 
-	Copyright 2013 Eduardo Zulian
+Copyright 2013 Eduardo Zulian
 
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License, version 2, as 
-    published by the Free Software Foundation.
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License, version 2, as 
+published by the Free Software Foundation.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with this program; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 /**
  * Load translated strings
  */
-function fpw_load_textdomain() {
+function afpw_load_textdomain() {
 
-	load_plugin_textdomain( 'featured-page-widget', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+	load_plugin_textdomain( 'a-featured-page-widget', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 	
 }
 
-add_action( 'plugins_loaded', 'fpw_load_textdomain' );
+add_action( 'plugins_loaded', 'afpw_load_textdomain' );
 
 /**
  * Register the widget
  */
-function fpw_register_widgets() {
+function afpw_register_widgets() {
 
-	register_widget( 'Featured_Page_Widget' );
+	register_widget( 'A_Featured_Page_Widget' );
 	
 }
 
-add_action( 'widgets_init', 'fpw_register_widgets' );
+add_action( 'widgets_init', 'afpw_register_widgets' );
 
 /**
- * Featured Page Widget
+ * A Featured Page Widget
  * Feature a page, showing its excerpt and thumbnail
  *
  */
-class Featured_Page_Widget extends WP_Widget {
+class A_Featured_Page_Widget extends WP_Widget {
 
 	public function __construct() {
 		parent::__construct(
-	 		'featured_page',
-			__( 'Featured Page Widget', 'featured-page-widget' ),
-			array( 'description' => __( 'Feature a page and display its excerpt and post thumbnail.', 'featured-page-widget' ) )
+	 		'a_featured_page_widget',
+			__( 'A Featured Page Widget', 'a-featured-page-widget' ),
+			array( 'description' => __( 'Feature a page and display its excerpt and post thumbnail.', 'a-featured-page-widget' ) )
 		);
 	}
 
@@ -70,7 +70,7 @@ class Featured_Page_Widget extends WP_Widget {
 	 * @param array $instance Saved values from database.
 	 */
 	function widget( $args, $instance ) {
-	 	$cache = wp_cache_get( 'featured_page', 'widget' );
+	 	$cache = wp_cache_get( 'a_featured_page_widget', 'widget' );
 
 		if ( !is_array($cache) )
 		        $cache = array();
@@ -132,7 +132,7 @@ class Featured_Page_Widget extends WP_Widget {
 		}
 
 		$cache[$args['widget_id']] = ob_get_flush();
-		wp_cache_set( 'featured_page', $cache, 'widget' );
+		wp_cache_set( 'a_featured_page_widget', $cache, 'widget' );
 	}
 
 	function update( $new_instance, $old_instance ) {
@@ -144,28 +144,28 @@ class Featured_Page_Widget extends WP_Widget {
 		$this->flush_widget_cache();
 
 		$alloptions = wp_cache_get( 'alloptions', 'options' );
-		if ( isset( $alloptions['featured_page'] ) )
-			delete_option( 'featured_page' );
+		if ( isset( $alloptions['a_featured_page_widget'] ) )
+			delete_option( 'a_featured_page_widget' );
 
 		return $instance;
 	}
 
 	function flush_widget_cache() {
-		wp_cache_delete( 'featured_page', 'widget' );
+		wp_cache_delete( 'a_featured_page_widget', 'widget' );
 	}
 
 	function form( $instance ) {
 		$title = isset( $instance['title'] ) ? strip_tags( $instance['title'] ) : '';
 		$page = isset( $instance['page'] ) ? (int) $instance['page'] : 0;
 		$image_size = isset( $instance['image-size'] ) ? strip_tags( $instance['image-size'] ) : 'thumbnail';
-		$page_link = isset( $instance['page-link'] ) ? strip_tags( $instance['page-link'] ) : __( 'Continue reading', 'featured-page-widget' );
+		$page_link = isset( $instance['page-link'] ) ? strip_tags( $instance['page-link'] ) : __( 'Continue reading', 'a-featured-page-widget' );
 		?>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php _e( 'Title:', 'featured-page-widget' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php _e( 'Title:', 'a-featured-page-widget' ); ?></label>
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'page' ); ?>"><?php _e( 'Page:', 'featured-page-widget' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'page' ); ?>"><?php _e( 'Page:', 'a-featured-page-widget' ); ?></label>
 			<?php
 			// Mimic wp_dropdown_pages() funcionality to add a 'widefat' class to the <select> tag
 			$args = array(
@@ -184,7 +184,7 @@ class Featured_Page_Widget extends WP_Widget {
 	        
 	        if ( ! empty( $pages ) ) : ?>
 	            <select class="widefat" name="<?php echo esc_attr( $name ); ?>" id="<?php echo esc_attr( $id ); ?>">
-	            	<option value="-1"><?php _e( 'Select a page', 'featured-page-widget' ); ?></option>
+	            	<option value="-1"><?php _e( 'Select a page', 'a-featured-page-widget' ); ?></option>
 	            	<?php echo walk_page_dropdown_tree( $pages, $depth, $args ) ?>;
 	            </select>
 	        <?php
@@ -192,9 +192,9 @@ class Featured_Page_Widget extends WP_Widget {
 	        ?>
         </p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'image-size' ); ?>"><?php _e( 'Post thumbnail size:', 'featured-page-widget' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'image-size' ); ?>"><?php _e( 'Post thumbnail size:', 'a-featured-page-widget' ); ?></label>
 			<select class="widefat" id="<?php echo $this->get_field_id( 'image-size' ); ?>" name="<?php echo $this->get_field_name( 'image-size' ); ?>">
-				<option value="no-thumbnail" <?php selected( $image_size, 'no-thumbnail' ); ?>><?php _e( 'No post thumbnail, thanks', 'featured-page-widget' ); ?></option>
+				<option value="no-thumbnail" <?php selected( $image_size, 'no-thumbnail' ); ?>><?php _e( 'No post thumbnail, thanks', 'a-featured-page-widget' ); ?></option>
 				<?php
 				$all_image_sizes = $this->_get_all_image_sizes();
 				foreach ( $all_image_sizes as $key => $value ) :
@@ -204,9 +204,9 @@ class Featured_Page_Widget extends WP_Widget {
 			</select>
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'page-link' ) ); ?>"><?php _e( 'Link text:', 'featured-page-widget' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'page-link' ) ); ?>"><?php _e( 'Link text:', 'a-featured-page-widget' ); ?></label>
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'page-link' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'page-link' ) ); ?>" type="text" value="<?php echo esc_attr( $page_link ); ?>" />
-			<small><?php _e( 'If empty, there will be no link to featured page.', 'featured-page-widget' ); ?></small>
+			<small><?php _e( 'If empty, there will be no link to featured page.', 'a-featured-page-widget' ); ?></small>
 		</p>
 	<?php
 	}
