@@ -1,6 +1,6 @@
 === A Featured Page Widget ===
 Contributors: eduardozulian
-Donate link: 
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=H28V8F5PHSZHA
 Tags: widget, widgets, page widget, featured page, pages
 Requires at least: 3.0
 Tested up to: 3.6
