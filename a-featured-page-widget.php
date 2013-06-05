@@ -36,19 +36,31 @@ function afpw_load_textdomain() {
 add_action( 'plugins_loaded', 'afpw_load_textdomain' );
 
 /**
+ * Enqueue a stylesheet
+ */
+function afpw_enqueue_stylesheet() {
+
+	wp_register_style( 'a-featured-page-widget', plugins_url( 'css/a-featured-page-widget.css', __FILE__) );
+	wp_enqueue_style( 'a-featured-page-widget' );
+	
+}
+
+add_action( 'wp_enqueue_scripts', 'afpw_enqueue_stylesheet' );
+
+/**
  * Register the widget
  */
-function afpw_register_widgets() {
+function afpw_register_widget() {
 
 	register_widget( 'A_Featured_Page_Widget' );
 	
 }
 
-add_action( 'widgets_init', 'afpw_register_widgets' );
+add_action( 'widgets_init', 'afpw_register_widget' );
 
 /**
  * A Featured Page Widget
- * Feature a page, showing its excerpt and thumbnail
+ * Feature a page, showing its excerpt and thumbnail.
  *
  */
 class A_Featured_Page_Widget extends WP_Widget {
