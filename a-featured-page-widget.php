@@ -3,7 +3,7 @@
 Plugin Name: A Featured Page Widget
 Plugin URI: http://github.com/eduardozulian/a-featured-page-widget
 Description: Feature a page and display its excerpt and post thumbnail.
-Version: 1.0
+Version: 1.1
 Author: Eduardo Zulian
 Author URI: http://flutuante.com.br
 License: GPL2
@@ -36,7 +36,7 @@ function afpw_load_textdomain() {
 add_action( 'plugins_loaded', 'afpw_load_textdomain' );
 
 /**
- * Enqueue a stylesheet
+ * Enqueue the stylesheet
  */
 function afpw_enqueue_stylesheet() {
 
@@ -170,7 +170,7 @@ class A_Featured_Page_Widget extends WP_Widget {
 		$title = isset( $instance['title'] ) ? strip_tags( $instance['title'] ) : '';
 		$page = isset( $instance['page'] ) ? (int) $instance['page'] : 0;
 		$image_size = isset( $instance['image-size'] ) ? strip_tags( $instance['image-size'] ) : 'thumbnail';
-		$page_link = isset( $instance['page-link'] ) ? strip_tags( $instance['page-link'] ) : __( 'Continue reading', 'a-featured-page-widget' );
+		$page_link = isset( $instance['page-link'] ) ? strip_tags( $instance['page-link'] ) : apply_filters( 'afpw_link_text', __( 'Continue reading', 'a-featured-page-widget' ) );
 		?>
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php _e( 'Title:', 'a-featured-page-widget' ); ?></label>
