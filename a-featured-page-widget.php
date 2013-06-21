@@ -101,7 +101,7 @@ class A_Featured_Page_Widget extends WP_Widget {
 		if ( isset( $instance['page'] ) && $instance['page'] != -1 ) {
 		
 			$page_id = (int) $instance['page'];
-			$page_link = isset( $instance['page-link'] ) ? strip_tags( $instance['page-link'] ) : apply_filters( 'afpw_link_text', __( 'Continue reading', 'a-featured-page-widget' ) );
+			$link_text = isset( $instance['link-text'] ) ? strip_tags( $instance['link-text'] ) : apply_filters( 'afpw_link_text', __( 'Continue reading', 'a-featured-page-widget' ) );
 			$image_size = isset( $instance['image-size'] ) ? strip_tags( $instance['image-size'] ) : 'thumbnail';
 		
 			$p = new WP_Query( array( 'page_id' => $page_id ) );
@@ -128,8 +128,8 @@ class A_Featured_Page_Widget extends WP_Widget {
 					
 					<div class="entry-content">
 						<?php the_excerpt(); ?>
-						<?php if ( ! empty( $page_link ) ) : ?>
-						<a href="<?php the_permalink(); ?>" class="more-link"><?php echo $page_link; ?></a>
+						<?php if ( ! empty( $link_text ) ) : ?>
+						<a href="<?php the_permalink(); ?>" class="more-link"><?php echo $link_text; ?></a>
 						<?php endif; ?>
 					</div>
 					
@@ -152,7 +152,7 @@ class A_Featured_Page_Widget extends WP_Widget {
 		$instance['title'] = strip_tags( $new_instance['title'] );
 		$instance['page'] = (int)( $new_instance['page'] );
 		$instance['image-size'] = strip_tags( $new_instance['image-size'] );
-		$instance['page-link'] = strip_tags( $new_instance['page-link'] );
+		$instance['link-text'] = strip_tags( $new_instance['link-text'] );
 		$this->flush_widget_cache();
 
 		$alloptions = wp_cache_get( 'alloptions', 'options' );
@@ -170,7 +170,7 @@ class A_Featured_Page_Widget extends WP_Widget {
 		$title = isset( $instance['title'] ) ? strip_tags( $instance['title'] ) : '';
 		$page = isset( $instance['page'] ) ? (int) $instance['page'] : 0;
 		$image_size = isset( $instance['image-size'] ) ? strip_tags( $instance['image-size'] ) : 'thumbnail';
-		$page_link = isset( $instance['page-link'] ) ? strip_tags( $instance['page-link'] ) : apply_filters( 'afpw_link_text', __( 'Continue reading', 'a-featured-page-widget' ) );
+		$link_text = isset( $instance['link-text'] ) ? strip_tags( $instance['link-text'] ) : apply_filters( 'afpw_link_text', __( 'Continue reading', 'a-featured-page-widget' ) );
 		?>
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php _e( 'Title:', 'a-featured-page-widget' ); ?></label>
@@ -216,8 +216,8 @@ class A_Featured_Page_Widget extends WP_Widget {
 			</select>
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'page-link' ) ); ?>"><?php _e( 'Link text:', 'a-featured-page-widget' ); ?></label>
-			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'page-link' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'page-link' ) ); ?>" type="text" value="<?php echo esc_attr( $page_link ); ?>" />
+			<label for="<?php echo esc_attr( $this->get_field_id( 'link-text' ) ); ?>"><?php _e( 'Link text:', 'a-featured-page-widget' ); ?></label>
+			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'link-text' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'link-text' ) ); ?>" type="text" value="<?php echo esc_attr( $link_text ); ?>" />
 			<small><?php _e( 'If empty, there will be no link to featured page.', 'a-featured-page-widget' ); ?></small>
 		</p>
 	<?php
