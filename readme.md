@@ -7,7 +7,7 @@
 **Tags:** widget, sidebar, page widget, featured page, pages  
 **Requires at least:** 3.0  
 **Tested up to:** 3.6  
-**Stable tag:** 1.1  
+**Stable tag:** 1.2  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -26,6 +26,29 @@ This plugin creates a widget that features a specific page, showing its excerpt.
 3. Go to 'Widgets' menu and drag it to your sidebar
 
 ## Frequently Asked Questions ##
+
+### Can I use it outside my sidebar / widget area?
+
+Sure you can! Just call [`the_widget()`](http://codex.wordpress.org/Function_Reference/the_widget) wherever you want to display your featured page. If you want to customize it, there's four arguments:
+
+* `page`: The page ID. *Required*.
+* `title`: The widget title.
+* `image-size`: The post thumbnail size. 
+* `link-text`: The text that will replace "Continue reading". You may leave it empty too.
+
+Example:
+```
+<?php
+the_widget( 'A_Featured_Page_Widget', array( 'page' => 734, 'link-text' => '', 'image-size' => 'large' ) );
+?>
+```
+
+If you don't know the page ID, you can try [`get_page_by_path()`](http://codex.wordpress.org/Function_Reference/get_page_by_path) function:
+```
+<?php
+the_widget( 'A_Featured_Page_Widget', 'page=' . get_page_by_path( 'about' )->ID );
+?>
+```
 
 ### Can I change the default text "Continue reading"? ###
 
@@ -54,6 +77,10 @@ add_action( 'init', 'mytheme_add_page_excerpt' );
 ```
 
 ## Changelog ##
+
+### 1.2 ###
+* Added widget defaults and removed cache functionality to work correctly with `the_widget()`.
+* Replaced `page-link` argument with `link-text`.
 
 ### 1.1 ###
 * Added a filter for the "Continue reading" text.
