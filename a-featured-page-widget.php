@@ -101,8 +101,8 @@ class A_Featured_Page_Widget extends WP_Widget {
 		if ( isset( $instance['page'] ) && $instance['page'] != -1 ) {
 		
 			$page_id = (int) $instance['page'];
-			$page_link = strip_tags( $instance['page-link'] );
-			$image_size = $instance['image-size'];
+			$page_link = isset( $instance['page-link'] ) ? strip_tags( $instance['page-link'] ) : apply_filters( 'afpw_link_text', __( 'Continue reading', 'a-featured-page-widget' ) );
+			$image_size = isset( $instance['image-size'] ) ? strip_tags( $instance['image-size'] ) : 'thumbnail';
 		
 			$p = new WP_Query( array( 'page_id' => $page_id ) );
 		
