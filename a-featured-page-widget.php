@@ -3,7 +3,7 @@
 Plugin Name: A Featured Page Widget
 Plugin URI: http://github.com/eduardozulian/a-featured-page-widget
 Description: Feature a page and display its excerpt and post thumbnail.
-Version: 1.1
+Version: 1.2
 Author: Eduardo Zulian
 Author URI: http://flutuante.com.br
 License: GPL2
