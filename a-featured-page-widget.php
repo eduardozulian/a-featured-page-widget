@@ -106,9 +106,7 @@ class A_Featured_Page_Widget extends WP_Widget {
 				<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>			
 					<?php if ( $image_size != 'no-thumbnail' && has_post_thumbnail() ) : ?>
 					<a class="thumbnail-link" href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">						
-						<div class="entry-image">
-							<?php the_post_thumbnail( $image_size ); ?>
-						</div>
+						<?php the_post_thumbnail( $image_size ); ?>
 					</a>
 					<?php endif; ?>
 					
