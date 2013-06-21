@@ -81,21 +81,7 @@ class A_Featured_Page_Widget extends WP_Widget {
 	 * @param array $args Widget arguments.
 	 * @param array $instance Saved values from database.
 	 */
-	function widget( $args, $instance ) {
-	 	$cache = wp_cache_get( 'a_featured_page_widget', 'widget' );
-
-		if ( !is_array($cache) )
-		        $cache = array();
-		
-		if ( ! isset( $args['widget_id'] ) )
-		        $args['widget_id'] = $this->id;
-		
-		if ( isset( $cache[ $args['widget_id'] ] ) ) {
-		        echo $cache[ $args['widget_id'] ];
-		        return;
-		}
-		
-		ob_start();
+	function widget( $args, $instance ) {	 
 		extract($args);		
 
 		if ( isset( $instance['page'] ) && $instance['page'] != -1 ) {
@@ -119,7 +105,7 @@ class A_Featured_Page_Widget extends WP_Widget {
 				?>
 				<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>			
 					<?php if ( $image_size != 'no-thumbnail' && has_post_thumbnail() ) : ?>
-					<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">						
+					<a class="thumbnail-link" href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">						
 						<div class="entry-image">
 							<?php the_post_thumbnail( $image_size ); ?>
 						</div>
@@ -142,9 +128,6 @@ class A_Featured_Page_Widget extends WP_Widget {
 			
 			}
 		}
-
-		$cache[$args['widget_id']] = ob_get_flush();
-		wp_cache_set( 'a_featured_page_widget', $cache, 'widget' );
 	}
 
 	function update( $new_instance, $old_instance ) {
@@ -153,17 +136,8 @@ class A_Featured_Page_Widget extends WP_Widget {
 		$instance['page'] = (int)( $new_instance['page'] );
 		$instance['image-size'] = strip_tags( $new_instance['image-size'] );
 		$instance['link-text'] = strip_tags( $new_instance['link-text'] );
-		$this->flush_widget_cache();
-
-		$alloptions = wp_cache_get( 'alloptions', 'options' );
-		if ( isset( $alloptions['a_featured_page_widget'] ) )
-			delete_option( 'a_featured_page_widget' );
-
+		
 		return $instance;
-	}
-
-	function flush_widget_cache() {
-		wp_cache_delete( 'a_featured_page_widget', 'widget' );
 	}
 
 	function form( $instance ) {
