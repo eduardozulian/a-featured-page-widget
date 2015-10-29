@@ -11,7 +11,7 @@ License: GPL2
 Copyright 2013 Eduardo Zulian
 
 This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License, version 2, as 
+it under the terms of the GNU General Public License, version 2, as
 published by the Free Software Foundation.
 
 This program is distributed in the hope that it will be useful,
@@ -28,9 +28,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  * Load translated strings
  */
 function afpw_load_textdomain() {
-
 	load_plugin_textdomain( 'a-featured-page-widget', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
-	
 }
 
 add_action( 'plugins_loaded', 'afpw_load_textdomain' );
@@ -39,10 +37,8 @@ add_action( 'plugins_loaded', 'afpw_load_textdomain' );
  * Enqueue the stylesheet
  */
 function afpw_enqueue_stylesheet() {
-
 	wp_register_style( 'a-featured-page-widget', plugins_url( 'css/a-featured-page-widget.css', __FILE__) );
 	wp_enqueue_style( 'a-featured-page-widget' );
-	
 }
 
 add_action( 'wp_enqueue_scripts', 'afpw_enqueue_stylesheet' );
@@ -51,9 +47,7 @@ add_action( 'wp_enqueue_scripts', 'afpw_enqueue_stylesheet' );
  * Register the widget
  */
 function afpw_register_widget() {
-
 	register_widget( 'A_Featured_Page_Widget' );
-	
 }
 
 add_action( 'widgets_init', 'afpw_register_widget' );
@@ -81,29 +75,28 @@ class A_Featured_Page_Widget extends WP_Widget {
 	 * @param array $args Widget arguments.
 	 * @param array $instance Saved values from database.
 	 */
-	function widget( $args, $instance ) {	 
-		extract($args);		
+	function widget( $args, $instance ) {
+		extract( $args );
 
 		if ( isset( $instance['page'] ) && $instance['page'] != -1 ) {
-		
+
 			$page_id = (int) $instance['page'];
 			$link_text = isset( $instance['link-text'] ) ? strip_tags( $instance['link-text'] ) : apply_filters( 'afpw_link_text', __( 'Continue reading', 'a-featured-page-widget' ) );
 			$image_size = isset( $instance['image-size'] ) ? strip_tags( $instance['image-size'] ) : 'thumbnail';
-		
+
 			$p = new WP_Query( array( 'page_id' => $page_id ) );
-		
+
 			if ( $p->have_posts() ) {
-			
 				$p->the_post();
-				
+
 				$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? get_the_title() : $instance['title'], $instance, $this->id_base );
-				
+
 				echo $before_widget;
 				echo $before_title;
 				echo $title;
 				echo $after_title;
 				?>
-				<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>			
+				<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 					<?php if ( $image_size != 'no-thumbnail' && has_post_thumbnail() ) : ?>
 						<div class="post-thumbnail entry-image">
 							<a class="thumbnail-link" href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">						
@@ -111,21 +104,19 @@ class A_Featured_Page_Widget extends WP_Widget {
 							</a>
 						</div>
 					<?php endif; ?>
-					
+
 					<div class="entry-content">
 						<?php the_excerpt(); ?>
 						<?php if ( ! empty( $link_text ) ) : ?>
 						<a href="<?php the_permalink(); ?>" class="more-link"><?php echo $link_text; ?></a>
 						<?php endif; ?>
 					</div>
-					
 				</div>
-				
+
 				<?php
 				echo $after_widget;
-	
+
 				wp_reset_postdata();
-			
 			}
 		}
 	}
@@ -136,7 +127,7 @@ class A_Featured_Page_Widget extends WP_Widget {
 		$instance['page'] = (int)( $new_instance['page'] );
 		$instance['image-size'] = strip_tags( $new_instance['image-size'] );
 		$instance['link-text'] = strip_tags( $new_instance['link-text'] );
-		
+
 		return $instance;
 	}
 
@@ -164,10 +155,10 @@ class A_Featured_Page_Widget extends WP_Widget {
 	            'show_option_no_change' => '',
 	            'option_none_value' => ''
 	        );
-	
+
 	        extract( $args, EXTR_SKIP );
-	        $pages = get_pages($args);
-	        
+	        $pages = get_pages( $args );
+
 	        if ( ! empty( $pages ) ) : ?>
 	            <select class="widefat" name="<?php echo esc_attr( $name ); ?>" id="<?php echo esc_attr( $id ); ?>">
 	            	<option value="-1"><?php _e( 'Select a page', 'a-featured-page-widget' ); ?></option>
@@ -196,7 +187,7 @@ class A_Featured_Page_Widget extends WP_Widget {
 		</p>
 	<?php
 	}
-	
+
 	/**
 	 * Get all the registered image sizes along with their dimensions
 	 *
@@ -209,16 +200,17 @@ class A_Featured_Page_Widget extends WP_Widget {
 		global $_wp_additional_image_sizes;
 
 		$default_image_sizes = array( 'thumbnail', 'medium', 'large' );
-		 
+
 		foreach ( $default_image_sizes as $size ) {
 			$image_sizes[$size]['width']	= intval( get_option( "{$size}_size_w") );
 			$image_sizes[$size]['height'] = intval( get_option( "{$size}_size_h") );
 			$image_sizes[$size]['crop']	= get_option( "{$size}_crop" ) ? get_option( "{$size}_crop" ) : false;
 		}
-		
-		if ( isset( $_wp_additional_image_sizes ) && count( $_wp_additional_image_sizes ) )
+
+		if ( isset( $_wp_additional_image_sizes ) && count( $_wp_additional_image_sizes ) ) {
 			$image_sizes = array_merge( $image_sizes, $_wp_additional_image_sizes );
-			
+		}
+
 		return $image_sizes;
 	}
 }
