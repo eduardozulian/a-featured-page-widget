@@ -14,6 +14,9 @@ Feature a page and display its excerpt and post thumbnail.
 
 This plugin creates a widget that features a specific page, showing its excerpt. You can also choose a post thumbnail among the registered ones in your theme.
 
+= Contributing =
+[A Featured Page Widget](https://github.com/eduardozulian/a-featured-page-widget) is available on GitHub. If you want to contribute, please fork it and send a pull request!
+
 = Languages =
 
 * Portuguese (Brazil)

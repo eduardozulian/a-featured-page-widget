@@ -19,6 +19,9 @@ This plugin creates a widget that features a specific page, showing its excerpt.
 
 * Portuguese (Brazil)
 
+### Contributing ###
+[A Featured Page Widget](https://github.com/eduardozulian/a-featured-page-widget) is available on GitHub. If you want to contribute, please fork it and send a pull request!
+
 ## Installation ##
 
 1. Upload `a-featured-page-widget` directory to the `/wp-content/plugins/` directory
