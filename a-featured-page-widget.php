@@ -37,7 +37,7 @@ add_action( 'plugins_loaded', 'afpw_load_textdomain' );
  * Enqueue the stylesheet
  */
 function afpw_enqueue_stylesheet() {
-	wp_register_style( 'a-featured-page-widget', plugins_url( 'css/a-featured-page-widget.css', __FILE__) );
+	wp_register_style( 'a-featured-page-widget', plugins_url( 'css/a-featured-page-widget.css', __FILE__ ) );
 	wp_enqueue_style( 'a-featured-page-widget' );
 }
 
@@ -59,6 +59,11 @@ add_action( 'widgets_init', 'afpw_register_widget' );
  */
 class A_Featured_Page_Widget extends WP_Widget {
 
+	/**
+	 * Sets up a new widget instance.
+	 *
+	 * @access public
+	 */
 	public function __construct() {
 		parent::__construct(
 	 		'a_featured_page_widget',
@@ -68,12 +73,12 @@ class A_Featured_Page_Widget extends WP_Widget {
 	}
 
 	/**
-	 * Front-end display of widget.
+	 * Outputs the content for a new widget instance.
 	 *
 	 * @see WP_Widget::widget()
 	 *
-	 * @param array $args Widget arguments.
-	 * @param array $instance Saved values from database.
+	 * @param array $args 		Widget arguments.
+	 * @param array $instance 	Saved values from database.
 	 */
 	function widget( $args, $instance ) {
 		extract( $args );
@@ -143,17 +148,20 @@ class A_Featured_Page_Widget extends WP_Widget {
 		</p>
 		<p>
 			<label for="<?php echo $this->get_field_id( 'page' ); ?>"><?php _e( 'Page:', 'a-featured-page-widget' ); ?></label>
+
 			<?php
-			// Mimic wp_dropdown_pages() funcionality to add a 'widefat' class to the <select> tag
+			/**
+			 *  Mimics wp_dropdown_pages() funcionality to add a 'widefat' class to the <select> tag
+			 */
 			$args = array(
-	            'depth' => 0,
-	            'child_of' => 0,
-	            'selected' => $page,
-	            'name' => $this->get_field_name( 'page' ),
-	            'id' => $this->get_field_id( 'page' ),
-	            'show_option_none' => '',
+	            'depth' 				=> 0,
+	            'child_of' 				=> 0,
+	            'selected' 				=> $page,
+	            'name' 					=> $this->get_field_name( 'page' ),
+	            'id' 					=> $this->get_field_id( 'page' ),
+	            'show_option_none' 		=> '',
 	            'show_option_no_change' => '',
-	            'option_none_value' => ''
+	            'option_none_value' 	=> ''
 	        );
 
 	        extract( $args, EXTR_SKIP );
@@ -189,7 +197,7 @@ class A_Featured_Page_Widget extends WP_Widget {
 	}
 
 	/**
-	 * Get all the registered image sizes along with their dimensions
+	 * Returns all the registered image sizes along with their dimensions
 	 *
 	 * @global array $_wp_additional_image_sizes
 	 *
