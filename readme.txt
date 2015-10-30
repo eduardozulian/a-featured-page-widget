@@ -88,6 +88,10 @@ Arnaldo Baptista, Rita Lee and Sérgio Dias, also known as Os Mutantes, a Brazil
 
 == Changelog ==
 
+= 1.3 =
+* Introduce classes generally used for post thumbnails, such as `post-thumbnail` and `entry-image`.
+* Update coding standards.
+
 = 1.2 =
 * Added widget defaults and removed cache functionality to work correctly with `the_widget()`.
 * Replaced `page-link` argument with `link-text`.
